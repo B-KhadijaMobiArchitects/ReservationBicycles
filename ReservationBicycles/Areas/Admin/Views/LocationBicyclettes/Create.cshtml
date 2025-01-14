@@ -1,0 +1,71 @@
+﻿@model DAL.Entities.LocationBicyclette
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container-fluid">
+    <div class="row py-3">
+        <h3 class=" col-md-4 fw-bold text-start">Nouvelle Réservation</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create" method="post">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="BicycletteId" class="control-label py-3"> Bicyclette</label>
+                    <select asp-for="BicycletteId" name="BicycletteId" class="form-control px-3" asp-items="ViewBag.BicycletteId">
+                        <option value="">-- Bicyclette --</option>
+                        @foreach (var model1 in (IEnumerable<DAL.Entities.Bicyclette>)ViewBag.listBicyclette)
+                        {
+                            <option value="@model1.Id">@model1.Libelle (Prix  : @model1.Prix)</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClientId" class="control-label py-3">Client</label>
+                    <select name="ClientId" class="form-control px-3" asp-items="ViewBag.ClientId">
+                            <option value="">-- Client --</option>
+                        @foreach (var model1 in (IEnumerable<DAL.Entities.Client>)ViewBag.ListClients)
+                            {
+                                <option value="@model1.Id">@model1.NomClient @model1.PrenomClient</option>
+                            }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateDebut" class="control-label py-3"> Date Début</label>
+                    <input asp-for="DateDebut" name="DateDebut" type="date" class="form-control px-3" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateFin" class="control-label py-3">Date Fin</label>
+                    <input asp-for="DateFin" name="DateFin" type="date" class="form-control px-3" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ModePaiement" class="control-label py-3">Mode De Paiement</label>
+                    <select name="ModePaiement" class="form-control px-3" asp-items="ViewBag.ModePaiement">
+                        <option value="">-- Paiement --</option>
+                        @foreach (var model1 in (IEnumerable<DAL.Entities.ModePaiement>)ViewBag.ModePaiement)
+                        {
+                            <option value="@model1.Id">@model1.Libelle</option>
+                        }
+                    </select>
+                </div>
+                @* <div class="form-group">
+                    <label asp-for="Totale" class="control-label">Totale <small class="fw-bold">DH</small></label>
+                    <input asp-for="Totale" name="Totale" type="number" class="form-control px-3" />
+                    <span asp-validation-for="Totale" class="text-danger"></span>
+                </div> *@
+                <div class="form-group row d-flex py-4 px-3 justify-content-between">
+                    <a href="/Admin/LocationBicyclettes/Index" class="col-md-2 btn btn-info">Retour</a>
+                    <input type="submit" value="Ajouter" class="btn btn-primary col-md-2" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

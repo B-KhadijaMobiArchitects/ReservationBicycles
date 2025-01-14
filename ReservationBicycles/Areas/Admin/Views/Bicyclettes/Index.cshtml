@@ -1,0 +1,88 @@
+﻿@model IEnumerable<DAL.Entities.Bicyclette>
+@{
+    ViewData["Title"] = "Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+<div class="container-fluid py-4">
+    <div class="row py-3">
+        <h3 class=" col-md-4 fw-bold text-center">Gestion Des Biscyclette</h3>
+        <div class=" offset-4 col-4 text-end px-3">
+            <a class="btn mb-0" href="/Admin/Bicyclettes/Create" @* style="background-color:#344767; color:white;" *@>Nouvelle Bicyclette</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Bicyclettes</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr class="text-center">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N°</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bicyclette</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Prix</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">disponibilite</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Etat</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Model</th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var i in Model)
+                                {
+
+                                    <tr >
+                                        <td class="text-center">
+                                            <span class="fw-bold">@i.Id</span>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <img src="@Url.Action("GetImage", "Help", new { path = i.Photo })" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@i.Libelle</h6>
+                                                    <p class="text-xs text-secondary mb-0">@i.ModeleNavigation.Code</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">@i.Prix</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">@i.Disponibilite</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm @(i.EtatNavigation.Libelle == "NEUF" ? "bg-gradient-success" :
+                                  i.EtatNavigation.Libelle == "BIEN" ? "bg-gradient-info" :
+                                  i.EtatNavigation.Libelle == "ancienne" ? "bg-gradient-danger" :
+                                  "bg-gradient-secondary")">
+                                                @i.EtatNavigation.Libelle
+                                            </span>
+                                        </td>
+
+                                        <td class="align-middle text-center">
+                                            <span class="text-secondary text-xs font-weight-bold">@i.ModeleNavigation.Libelle</span>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a class="text-secondary font-weight-bold text-xs" href="/Admin/Bicyclettes/Edit/@i.Id">Edit</a> |
+@*                                             <a class="text-secondary font-weight-bold text-xs" asp-action="Details" asp-route-id="@i.Id">Details</a> |
+ *@                                            <a class="text-secondary font-weight-bold text-xs"  href="/Admin/Bicyclettes/Delete/@i.Id">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

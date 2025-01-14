@@ -1,0 +1,57 @@
+﻿@model DAL.Entities.Client
+
+@{
+    ViewData["Title"] = "Modifier";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <h4>Client N ° : @Model.Id</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Edit" method="post">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label name="NomClient" class="control-label">Nom</label>
+                    <input name="NomClient" value="@Model.NomClient" class="form-control px-3" type="text" />
+                    <span asp-validation-for="NomClient" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label name="PrenomClient" class="control-label">Prénom</label>
+                    <input name="PrenomClient" value="@Model.PrenomClient" class="form-control  px-3" type="text" />
+                    <span asp-validation-for="PrenomClient" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label name="Adresse" class="control-label">Adresse</label>
+                    <input name="Adresse" value="@Model.Adresse" class="form-control  px-3" type="text" />
+                    <span asp-validation-for="Adresse" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label name="Telephone" class="control-label">Téléphone</label>
+                    <input name="Telephone" value="@Model.Telephone" class="form-control  px-3" type="text" />
+                    <span asp-validation-for="Telephone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label name="Email" class="control-label">Email</label>
+                    <input name="Email" value="@Model.Email" class="form-control  px-3" type="email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group row d-flex py-4 px-3 justify-content-between">
+                    <a href="/Admin/Clients/Index" class="col-md-2 btn btn-info">Retour</a>
+                    <input type="submit" value="Modifier" class="btn btn-primary col-md-2" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

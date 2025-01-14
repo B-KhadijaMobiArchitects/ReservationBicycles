@@ -67,11 +67,16 @@ body {
 [tabindex="-1"]:focus {
   outline: 0 !important; }
 
+.form-check-input:checked {
+    background-color: #EC407A;
+    border-color: #EC407A;
+}
 hr {
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible; }
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;

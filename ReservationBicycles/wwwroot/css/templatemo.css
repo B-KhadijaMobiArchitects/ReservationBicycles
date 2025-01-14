@@ -112,7 +112,7 @@ body, ul, li, p, a, label, input, div {
 }
 
 .pagination .page-link:hover, .pagination .page-link.active {
-    background-color: #69bb7e;
+    background-color: #EC407A;
     color: #fff;
 }
 /* Nav */
@@ -129,7 +129,7 @@ body, ul, li, p, a, label, input, div {
 }
 
     #templatemo_main_nav a:hover {
-        color: #69bb7e;
+        color: #EC407A;
     }
 
 #templatemo_main_nav .navbar .nav-icon {
@@ -154,7 +154,7 @@ body, ul, li, p, a, label, input, div {
 }
 /* Shop */
 .shop-top-menu a:hover {
-    color: #69bb7e !important;
+    color: #EC407A !important;
 }
 /* Product */
 .product-wap {
@@ -250,7 +250,7 @@ body, ul, li, p, a, label, input, div {
     }
 
     .services-icon-wap:hover {
-        background: #69bb7e;
+        background: #EC407A;
     }
 /* Contact map */
 .leaflet-control a, .leaflet-control {

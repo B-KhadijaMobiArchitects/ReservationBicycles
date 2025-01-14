@@ -29,7 +29,7 @@
                                         <h5 class="mb-3 text-sm">@i.Client.NomClient @i.Client.PrenomClient</h5>
                                         <h6 class="mb-3 text-sm colorpink"> Statut: @i.Statut.Libelle</h6>
                                         <span class="mb-2 text-xs"> Model: <span class="text-dark font-weight-bold ms-sm-2">@i.Bicyclette.ModeleNavigation.Libelle</span></span>
-                                        <span class="mb-2 text-xs"> Période: <span class="text-dark ms-sm-2 font-weight-bold">@i.DateDebut - @i.DateFin</span></span>
+                                        <span class="mb-2 text-xs"> Période: <span class="text-dark ms-sm-2 font-weight-bold">@i.DateDebut.ToString("dd-MM-yyyy") - @i.DateFin.ToString("dd-MM-yyyy")</span></span>
                                         <span class="mb-2 text-xs"> Télephone: <span class="text-dark ms-sm-2 font-weight-bold">@i.Client.Telephone</span></span>
                                         <span class="mb-2 text-xs"> Email: <span class="text-dark ms-sm-2 font-weight-bold">@i.Client.Email</span></span>
                                         <span class="text-xs">Mode de paiement <span class="text-dark ms-sm-2 font-weight-bold">@i.ModePaiementNavigation.Libelle</span></span>
@@ -37,8 +37,13 @@
                                     <div class="ms-auto text-end">
                                         @if (i.StatutId == (int)StatutEnum.CREER)
                                         {
-                                            <a class="btn btn-link text-success text-gradient px-3 mb-0" href="/Admin/LocationBicyclettes/AccepterReservation"><img src="/images/icons8-coche-48.png" alt="refuser" style="width:20px !important;" /> Accepter </a>
-                                            <a class="btn btn-link colorpink px-3 mb-0" href="/Admin/LocationBicyclettes/RefuserReservation"> <img src="/images/icons8-x-50.png" alt="refuser" style="width:25px !important;" />Refuser</a>
+                                            <a class="btn btn-link text-success text-gradient px-3 mb-0" href="/Admin/LocationBicyclettes/AccepterReservation/@i.Id"><img src="/images/icons8-coche-48.png" alt="refuser" style="width:20px !important;" /> Accepter </a>
+                                            <a class="btn btn-link colorpink px-3 mb-0" href="/Admin/LocationBicyclettes/RefuserReservation/@i.Id"> <img src="/images/icons8-x-50.png" alt="refuser" style="width:25px !important;" />Refuser</a>
+                                        }
+                                        else if (i.StatutId == (int)StatutEnum.REFUSER || i.StatutId == (int)StatutEnum.ACCEPTER)
+                                        {
+                                            <a class="btn btn-link text-info text-gradient px-3 mb-0" href="/Admin/LocationBicyclettes/CloturerReservation/@i.Id"><img src="/images/icons8-u-tourner-à-gauche-48.png" alt="refuser" style="width:20px !important;" /> Clôturer </a>
+
                                         }
                                     </div>
                                 </li>

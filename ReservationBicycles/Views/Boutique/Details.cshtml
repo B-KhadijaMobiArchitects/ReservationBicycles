@@ -117,7 +117,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="reservationModalLabel">Réserver ce vélo</h5>
+                <h5 class="modal-title" id="reservationModalLabel"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -139,58 +139,57 @@
 
                     <!-- Informations communes pour tous les clients -->
                     <div class="form-group mb-3">
-                        <label name="Email" class="control-label">Email</label>
+                        <label name="Email" class="control-label py-3 fw-bold">Email</label>
                         <input name="Email" class="form-control px-3" type="email" />
                     </div>
 
                     <!-- Informations pour un nouveau client -->
                     <div id="newClientFields" style="display: none;">
                         <div class="form-group mb-3">
-                            <label name="NomClient" class="control-label">Nom</label>
+                            <label name="NomClient" class="control-labe py-3 fw-bold">Nom</label>
                             <input name="NomClient" class="form-control px-3" type="text" />
                         </div>
                         <div class="form-group mb-3">
-                            <label name="PrenomClient" class="control-label">Prénom</label>
+                            <label name="PrenomClient" class="control-label py-3 fw-bold">Prénom</label>
                             <input name="PrenomClient" class="form-control px-3" type="text" />
                         </div>
                         <div class="form-group mb-3">
-                            <label name="Adresse" class="control-label">Adresse</label>
+                            <label name="Adresse" class="control-label py-3 fw-bold">Adresse</label>
                             <input name="Adresse" class="form-control px-3" type="text" />
                         </div>
                         <div class="form-group mb-3">
-                            <label name="Telephone" class="control-label">Téléphone</label>
+                            <label name="Telephone" class="control-label py-3 fw-bold">Téléphone</label>
                             <input name="Telephone" class="form-control px-3" type="text" />
                         </div>
                     </div>
 
                     <!-- Champs communs -->
                     <div class="form-group mb-3">
-                        <label name="DateDebut" class="control-label py-3">Date Début</label>
+                        <label name="DateDebut" class="control-label fw-bold py-3">Date Début</label>
                         <input name="DateDebut" type="date" class="form-control px-3" required />
                     </div>
                     <div class="form-group mb-3">
-                        <label name="DateFin" class="control-label py-3">Date Fin</label>
+                        <label name="DateFin" class="control-label fw-bold py-3">Date Fin</label>
                         <input name="DateFin" type="date" class="form-control px-3" required />
                     </div>
                     <div class="form-group mb-3">
-                        <label name="ModePaiement" class="control-label py-3">Mode De Paiement</label>
+                        <label name="ModePaiement" class="control-label fw-bold py-3">Mode De Paiement</label>
                         <select name="ModePaiement" class="form-control px-3" required>
-                            <option value="">-- Paiement --</option>
+                            <option value="">Paiement</option>
                             @foreach (var model1 in (IEnumerable<DAL.Entities.ModePaiement>)ViewBag.ModePaiement)
                             {
                                 <option value="@model1.Id">@model1.Libelle</option>
                             }
                         </select>
                     </div>
-                    <div class="form-group mb-3">
-                        <button type="submit" class="btn btn-mycolorPink col-3">Envoyer la demande</button>
+                    <div class="form-group mb-3 row justify-content-end">
+                        <button type="submit" class="btn btn-mycolorPink col-4">Envoyer la demande</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
  <script>
          document.addEventListener('DOMContentLoaded', function () {
         const clientExistRadio = document.getElementById('clientExist');

@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DAL.Entities;
 using ReservationBicycles.Const;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ReservationBicycles.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
+
     public class LocationBicyclettesController : Controller
     {
         private readonly LocationVeloDbContext _context;
@@ -36,9 +39,11 @@ namespace ReservationBicycles.Areas.Admin.Controllers
                     reservation.StatutId = (int)StatutEnum.ACCEPTER;
                     _context.LocationBicyclettes.Update(reservation);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+
                 }
             }
-            return View(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> RefuserReservation(int id)
         {
@@ -50,9 +55,27 @@ namespace ReservationBicycles.Areas.Admin.Controllers
                     reservation.StatutId = (int)StatutEnum.REFUSER;
                     _context.LocationBicyclettes.Update(reservation);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+
                 }
             }
-            return View(nameof(Index));
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> CloturerReservation(int id)
+        {
+            if (id != 0)
+            {
+                var reservation = _context.LocationBicyclettes.Find(id);
+                if (reservation != null)
+                {
+                    reservation.StatutId = (int)StatutEnum.CLOTURER;
+                    _context.LocationBicyclettes.Update(reservation);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
         //// GET: Admin/LocationBicyclettes/Details/5
         //public async Task<IActionResult> Details(int? id)

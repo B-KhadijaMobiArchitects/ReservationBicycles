@@ -5,7 +5,7 @@
         CREER = 1,
         ACCEPTER,
         REFUSER,
-        CLOTURER
+        CLOTURER=5
 
 
     }

@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2">
-                    <div class="table-responsive p-0">
+                    <div class="table p-0">
                         <table class="table align-items-center justify-content-center mb-0">
                             <thead>
                                 <tr class="text-center">
@@ -71,7 +71,8 @@
                                                     <span class="me-2 text-xs font-weight-bold">@i.LocationBicyclettes.Count()</span>
                                                     <div>
                                                         <div class="progress">
-                                                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="(@i.LocationBicyclettes.Count())*100" aria-valuemin="0" aria-valuemax="100" style="width: (@i.LocationBicyclettes.Count())*100;"></div>
+                                                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: @i.LocationBicyclettes.Count()px;"></div>
+                                                        
                                                         </div>
                                                     </div>
                                                 </div>

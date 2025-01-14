@@ -44,7 +44,7 @@
                                     <img class="card-img rounded-0 img-fluid" src="@Url.Action("GetImage", "Help", new { path = i.Photo })">
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled text-center">
-                                            <li><a class="btn btn-mycolorPink text-white mt-2" asp-action="Reserver" asp-controller="Boutique" asp-route-id="@i.Id"><i class="fas fa-plus"></i> Réserver</a></li>
+                                            <li><a class="btn btn-mycolorPink text-white mt-2" data-bs-toggle="modal" data-bs-target="#reservationModal"><i class="fas fa-plus"></i> Réserver</a></li>
                                             <li><a class="btn bg-white colorpink text-white mt-2" asp-action="Details" asp-controller="Boutique" asp-route-id="@i.Id"><i class="fas fa-eye"></i>  Détails</a></li>
                                         </ul>
                                     </div>
@@ -61,6 +61,85 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="reservationModalLabel"></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="reservationForm" action="@Url.Action("Reserverbike", "Boutique")" method="post">
+                                            <input type="hidden" name="BicycletteId" value="@i.Id" />
+
+                                            <!-- Choix du type de client -->
+                                            <div class="form-group mb-3 row">
+                                                <label class="control-label">Êtes-vous déjà client ?</label>
+                                                <div class="form-check  col-6 px-5 py-3">
+                                                    <input class="form-check-input" type="radio" name="ClientType" id="clientExist" value="existing" checked>
+                                                    <label class="form-check-label" for="clientExist">Oui</label>
+                                                </div>
+                                                <div class="form-check col-6 px-5 py-3">
+                                                    <input class="form-check-input" type="radio" name="ClientType" id="clientNew" value="new">
+                                                    <label class="form-check-label" for="clientNew">Non</label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Informations communes pour tous les clients -->
+                                            <div class="form-group mb-3">
+                                                <label name="Email" class="control-label py-3 fw-bold">Email</label>
+                                                <input name="Email" class="form-control px-3" type="email" />
+                                            </div>
+
+                                            <!-- Informations pour un nouveau client -->
+                                            <div id="newClientFields" style="display: none;">
+                                                <div class="form-group mb-3">
+                                                    <label name="NomClient" class="control-labe py-3 fw-bold">Nom</label>
+                                                    <input name="NomClient" class="form-control px-3" type="text" />
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label name="PrenomClient" class="control-label py-3 fw-bold">Prénom</label>
+                                                    <input name="PrenomClient" class="form-control px-3" type="text" />
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label name="Adresse" class="control-label py-3 fw-bold">Adresse</label>
+                                                    <input name="Adresse" class="form-control px-3" type="text" />
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label name="Telephone" class="control-label py-3 fw-bold">Téléphone</label>
+                                                    <input name="Telephone" class="form-control px-3" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <!-- Champs communs -->
+                                            <div class="form-group mb-3">
+                                                <label name="DateDebut" class="control-label fw-bold py-3">Date Début</label>
+                                                <input name="DateDebut" type="date" class="form-control px-3" required />
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label name="DateFin" class="control-label fw-bold py-3">Date Fin</label>
+                                                <input name="DateFin" type="date" class="form-control px-3" required />
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label name="ModePaiement" class="control-label fw-bold py-3">Mode De Paiement</label>
+                                                <select name="ModePaiement" class="form-control px-3" required>
+                                                    <option value="">Paiement</option>
+                                                    @foreach (var model1 in (IEnumerable<DAL.Entities.ModePaiement>)ViewBag.ModePaiement)
+                                                    {
+                                                        <option value="@model1.Id">@model1.Libelle</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-3 row justify-content-end">
+                                                <button type="submit" class="btn btn-mycolorPink col-4">Envoyer la demande</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                     }
                 }
@@ -107,4 +186,27 @@
 
     </div>
 </div>
+
+<script>
+         document.addEventListener('DOMContentLoaded', function () {
+        const clientExistRadio = document.getElementById('clientExist');
+        const clientNewRadio = document.getElementById('clientNew');
+        const newClientFields = document.getElementById('newClientFields');
+
+        function toggleClientFields() {
+            if (clientNewRadio.checked) {
+                newClientFields.style.display = 'block';
+            } else {
+                newClientFields.style.display = 'none';
+            }
+        }
+
+        clientExistRadio.addEventListener('change', toggleClientFields);
+        clientNewRadio.addEventListener('change', toggleClientFields);
+
+        // Initial state
+        toggleClientFields();
+    });
+
+</script>
 <!-- End Content -->

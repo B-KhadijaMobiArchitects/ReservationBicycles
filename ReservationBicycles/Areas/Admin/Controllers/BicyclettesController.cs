@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ReservationBicycles.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
+
     public class BicyclettesController : Controller
     {
         private readonly LocationVeloDbContext _context;

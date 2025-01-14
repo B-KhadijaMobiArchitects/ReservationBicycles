@@ -29,7 +29,8 @@ namespace ReservationBicycles.Controllers
                 Value = m.Id.ToString(),
                 Text = m.Code
             }).ToList();
-
+            var listModePaiement = _context.ModePaiements.ToList();
+            ViewBag.ModePaiement = listModePaiement;
             // Passer la liste à la vue via ViewData
             ViewData["Roles"] = selectList;
 

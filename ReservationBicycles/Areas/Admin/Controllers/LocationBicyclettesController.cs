@@ -24,7 +24,7 @@ namespace ReservationBicycles.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var locationVeloDbContext = _context.LocationBicyclettes.Include(l => l.Statut).Include(l => l.Bicyclette).ThenInclude(l => l.ModeleNavigation).Include(l => l.Client).Include(l => l.ModePaiementNavigation);
-            return View(await locationVeloDbContext.ToListAsync());
+            return View(await locationVeloDbContext.OrderByDescending(r=>r.DateDebut).ToListAsync());
         }
         public async Task<IActionResult> AccepterReservation(int id)
         {

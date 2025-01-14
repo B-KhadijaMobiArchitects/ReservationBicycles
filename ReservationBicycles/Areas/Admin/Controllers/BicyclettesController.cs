@@ -63,7 +63,7 @@ namespace ReservationBicycles.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Libelle,Modele,Prix,DateAchat,Etat")] Bicyclette bicyclette)
+        public async Task<IActionResult> Create([Bind("Libelle,Modele,Prix,DateAchat,Etat")] Bicyclette bicyclette, IFormFile file)
         {
             if(bicyclette.Etat!=0 && bicyclette.Modele!=0)
             {
@@ -71,6 +71,18 @@ namespace ReservationBicycles.Areas.Admin.Controllers
                 var etat = _context.StatutBicyclettes.Find(bicyclette.Etat);
                 if (modele != null && etat != null) 
                 {
+                    if (file != null && file.Length > 0)
+                    {
+                        // Chemin où le fichier sera enregistré
+                        var filePath = Path.Combine("C:\\PhotoBike", file.FileName);
+
+                        // Enregistrer le fichier en local
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                        bicyclette.Photo = filePath;
+                    }
                     bicyclette.ModeleNavigation = modele;
                     bicyclette.EtatNavigation = etat;
                     bicyclette.Disponibilite = true;

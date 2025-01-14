@@ -9,7 +9,7 @@
     <div class="row py-3">
         <h3 class=" col-md-4 fw-bold text-center">Gestion Des Biscyclette</h3>
         <div class=" offset-4 col-4 text-end px-3">
-            <a class="btn mb-0" href="/Admin/Bicyclettes/Create" @* style="background-color:#344767; color:white;" *@>Nouvelle Bicyclette</a>
+            <a class="btn btn-info mb-0" href="/Admin/Bicyclettes/Create" @* style="background-color:#344767; color:white;" *@>Nouvelle Bicyclette</a>
         </div>
     </div>
     <div class="row">
@@ -60,10 +60,10 @@
                                             <p class="text-xs font-weight-bold mb-0">@i.Disponibilite</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm @(i.EtatNavigation.Libelle == "NEUF" ? "bg-gradient-success" :
-                                  i.EtatNavigation.Libelle == "BIEN" ? "bg-gradient-info" :
-                                  i.EtatNavigation.Libelle == "ancienne" ? "bg-gradient-danger" :
-                                  "bg-gradient-secondary")">
+                                            <span class="badge badge-sm @(i.EtatNavigation.Code == "NEUF" ? "btn-success" :
+                                  i.EtatNavigation.Code == "BIEN" ? "btn-warning" :
+                                  i.EtatNavigation.Code == "ANCIENNE" ? "btn bg-gradient-primary" :
+                                  "btn-info")">
                                                 @i.EtatNavigation.Libelle
                                             </span>
                                         </td>

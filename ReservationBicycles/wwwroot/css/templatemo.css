@@ -51,7 +51,13 @@ body, ul, li, p, a, label, input, div {
     font-family: 'Poppins', sans-serif;
     font-size: 22px !important;
 }
+.alert-primary {
+    background-image: linear-gradient(195deg, #EC407A 0%, #D81B60 100%);
+}
 
+.alert-success {
+    background-image: linear-gradient(195deg, #66BB6A 0%, #43A047 100%);
+}
 /* General */
 .logo {
     font-weight: 500 !important;
